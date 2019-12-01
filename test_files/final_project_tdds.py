@@ -36,6 +36,10 @@ class OrderTest(unittest.TestCase):
         with self.assertRaises(InvalidDishError):
             ord = Order('4', ['carbonara', 'spaghetti', 'lasagna'])
 
+    def test_blank_dishes(self):
+        with self.assertRaises(InvalidDishError):
+            ord = Order('4', [])
+
 
 if __name__ == '__main__':
     unittest.main()
