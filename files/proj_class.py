@@ -13,6 +13,8 @@ class Order:
         if not 1 <= int(table) <= 16:  # input validation
             raise InvalidTableNumber   # exception handling
         self.table = table
+        if len(dishes_list) == 0:  # input validation
+            raise MissingOrderError  # exception handling
         menu_list = (  # list, input validation
             'bruschetta',
             'arugula salad',
@@ -50,3 +52,6 @@ class InvalidDishError(Exception):
     # This custom exception is dish is not on the menu
     pass
 
+class MissingOrderError(Exception):
+    # This custom exception is if no dishes are entered in order
+    pass
