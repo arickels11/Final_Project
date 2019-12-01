@@ -5,6 +5,8 @@ class Order:
         :param table:  table # for the order, so other employee can bring food if ready
         :param dishes_list: dishes in the order
         '''
+        if table == '':  # input validation
+            raise EnterTableNumber  # exception handling
         self.table = table
         menu_list = (  # list, input validation
             'bruschetta',
