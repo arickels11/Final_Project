@@ -32,6 +32,10 @@ class OrderTest(unittest.TestCase):
         with self.assertRaises(InvalidTableNumber):
             ord = Order('18', ['carbonara', 'spaghetti', 'focaccia'])
 
+    def test_non_menu_lasagna(self):
+        with self.assertRaises(InvalidDishError):
+            ord = Order('4', ['carbonara', 'spaghetti', 'lasagna'])
+
 
 if __name__ == '__main__':
     unittest.main()
