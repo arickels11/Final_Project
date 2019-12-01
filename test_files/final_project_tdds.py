@@ -25,8 +25,8 @@ class OrderTest(unittest.TestCase):
             ord = Order('', ['carbonara', 'spaghetti', 'focaccia'])
 
     def test__invalid_table_input(self):
-        with self.assertRaises(EnterTableNumber):
-            ord = Order('', ['carbonara', 'spaghetti', 'focaccia'])
+        with self.assertRaises(InvalidTableNumber):
+            ord = Order('five', ['carbonara', 'spaghetti', 'focaccia'])
 
     def test__table_out_of_range(self):
         with self.assertRaises(InvalidTableNumber):

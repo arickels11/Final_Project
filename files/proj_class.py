@@ -7,6 +7,9 @@ class Order:
         '''
         if table == '':  # input validation
             raise EnterTableNumber  # exception handling
+        nums = set("1234567890")  # input validation
+        if not nums.issuperset(table):
+            raise InvalidTableNumber  # exception handling
         self.table = table
         menu_list = (  # list, input validation
             'bruschetta',
