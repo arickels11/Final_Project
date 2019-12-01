@@ -10,6 +10,8 @@ class Order:
         nums = set("1234567890")  # input validation
         if not nums.issuperset(table):
             raise InvalidTableNumber  # exception handling
+        if not 1 <= int(table) <= 16:  # input validation
+            raise InvalidTableNumber   # exception handling
         self.table = table
         menu_list = (  # list, input validation
             'bruschetta',
