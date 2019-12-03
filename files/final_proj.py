@@ -7,16 +7,6 @@ from datetime import timedelta
 import tkinter
 
 
-# Unit tests 20
-# Multiple Commits 10
-# Class 10
-# Input Validation 10
-# Exception Handling 10
-# Database 5
-# GUI 5
-# Code 20
-
-
 class InvalidTableNumber(Exception):
     # This custom exception is raised if table # is not within specified range
     pass
@@ -24,7 +14,7 @@ class InvalidTableNumber(Exception):
 
 class EnterTableNumber(Exception):
     # This custom exception is raised if table # is not within specified range
-    print('Enter a Table #')
+    pass
 
 
 class InvalidDishError(Exception):
@@ -32,7 +22,12 @@ class InvalidDishError(Exception):
     pass
 
 
-dish_dict = {
+class MissingOrderError(Exception):
+    # This custom exception is if no dishes are entered in order
+    pass
+
+
+dish_dict = {  # dictionary for all menu items and corresponding preparation time
     'bruschetta': 5,
     'arugula salad': 3,
     'carbonara': 12,
@@ -60,11 +55,11 @@ def order_input():
             else:
                 pass
         except ValueError:
-            raise InvalidTableNumber
+            raise InvalidTableNumber  # exception handling
 
     dish1 = dish1_entry.get()
     if dish1 == '':
-        print("no order was submitted")
+        raise MissingOrderError
     else:
         order_list.append(dish1)
 
@@ -80,7 +75,11 @@ def order_input():
     if not dish4 == '':
         order_list.append(dish4)
 
-    print('Table:', table_num, '\n' + get_time(order_list))
+    return str(print_table(table_num)) + str(get_time(order_list))
+
+
+def print_table(table_number):
+    print('Table:', table_number)
 
 
 def get_time(dish_list):
@@ -89,7 +88,7 @@ def get_time(dish_list):
     :return: time value of dish prep
     """
 
-    menu_list = (
+    menu_list = (  # list of menu items for input validation
         'bruschetta',
         'arugula salad',
         'carbonara',
@@ -104,7 +103,7 @@ def get_time(dish_list):
             raise InvalidDishError  # exception handling
         else:
             prep_time = str(time(dish))
-            return 'Begin ' + str(dish) + " at " + prep_time
+            print('Begin ' + str(dish) + " at " + prep_time)
 
 
 def time(dish):
@@ -119,10 +118,9 @@ def time(dish):
 
 n = tkinter.Tk()
 n.title('Tuscan Eatery Order')
-button = tkinter.Button(n, text='Submit Order', width=25, command=order_input)
-button.grid(row=7)
 
-table = tkinter.Label(n, text="Table: ", width=25, font='bold')
+
+table = tkinter.Label(n, text="TABLE (1-16): ", width=25, font='bold')
 table.grid(row=1)
 table_entry = tkinter.Entry(n, width=25)
 table_entry.grid(row=1, column=2)
@@ -146,5 +144,11 @@ dish4 = tkinter.Label(n, text="Dish 4: ", width=25)
 dish4.grid(row=5)
 dish4_entry = tkinter.Entry(n, width=25)
 dish4_entry.grid(row=5, column=2)
+
+button = tkinter.Button(n, text='Submit Order', width=25, command=order_input)
+button.grid(row=7)
+
+button = tkinter.Button(n, text='Cancel Screen', width=25, command=n.destroy)
+button.grid(row=8)
 
 n.mainloop()

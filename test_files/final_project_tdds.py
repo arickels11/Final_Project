@@ -7,11 +7,6 @@ import unittest
 from files.proj_class import *
 
 
-# class MyTestCase(unittest.TestCase):
-#     def test_something(self):
-#         self.assertEqual(True, False)
-
-
 class OrderTest(unittest.TestCase):
 
     def setUp(self):
@@ -19,6 +14,9 @@ class OrderTest(unittest.TestCase):
 
     def tearDown(self):
         del self.ord
+
+    # def test_something(self):
+    #     self.assertEqual(, False)
 
     def test__blank_table(self):
         with self.assertRaises(EnterTableNumber):
