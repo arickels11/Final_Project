@@ -16,7 +16,7 @@ class Order:
         if table == '':  # input validation
             raise EnterTableNumber  # exception handling
         nums = set("1234567890")  # input validation
-        if not nums.issuperset(table):
+        if not nums.issuperset(str(table)):
             raise InvalidTableNumber  # exception handling
         if not 1 <= int(table) <= 16:  # input validation
             raise InvalidTableNumber   # exception handling

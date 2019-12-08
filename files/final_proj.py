@@ -5,6 +5,7 @@ Final Project - Tuscan Eatery"""
 import datetime
 from datetime import timedelta
 import tkinter
+from files.proj_class import Order
 
 
 class InvalidTableNumber(Exception):
@@ -75,11 +76,13 @@ def order_input():
     if not dish4 == '':
         order_list.append(dish4)
 
-    return str(print_table(table_num)) + str(get_time(order_list))
+    order = Order(table_num, order_list)
+
+    text_output.insert(tkinter.END, str(print_table(order.table)) + str(get_time(order.dishes_list)))
 
 
 def print_table(table_number):
-    print('Table:', table_number)
+    return 'Table:' + str(table_number) + '\n'
 
 
 def get_time(dish_list):
@@ -98,12 +101,15 @@ def get_time(dish_list):
         'gelato'
     )
 
+    dish_output = ""
+
     for dish in dish_list:
         if dish not in menu_list:  # input validation - only dishes in menu can be ordered
             raise InvalidDishError  # exception handling
         else:
             prep_time = str(time(dish))
-            print('Begin ' + str(dish) + " at " + prep_time)
+            dish_output = dish_output + 'Begin ' + str(dish) + " at " + prep_time + "\n"
+    return dish_output
 
 
 def time(dish):
@@ -150,5 +156,8 @@ button.grid(row=7)
 
 button = tkinter.Button(n, text='Cancel Screen', width=25, command=n.destroy)
 button.grid(row=8)
+
+text_output = tkinter.Text(n, height=6, width=35)
+text_output.grid(row=9)
 
 n.mainloop()
