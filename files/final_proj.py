@@ -5,7 +5,8 @@ Final Project - Tuscan Eatery"""
 import datetime
 from datetime import timedelta
 import tkinter
-from files.proj_class import Order
+from files.ord_class import Order
+from files.db_class import *
 
 
 class InvalidTableNumber(Exception):
@@ -46,6 +47,7 @@ def order_input():
 
     order_list = []
 
+    order_db = OrderDatabase()
     if table_entry.get() == '':  # input validation - table field not left blank
         raise EnterTableNumber  # exception handling
     else:
@@ -77,7 +79,7 @@ def order_input():
         order_list.append(dish4)
 
     order = Order(table_num, order_list)
-
+    order_db.insert_order(order)
     text_output.insert(tkinter.END, str(print_table(order.table)) + str(get_time(order.dishes_list)))
 
 

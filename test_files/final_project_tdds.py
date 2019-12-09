@@ -4,7 +4,7 @@ Final Project - Unit Tests"""
 
 
 import unittest
-from files.proj_class import *
+from files.ord_class import *
 
 
 class OrderTest(unittest.TestCase):
